@@ -10,3 +10,8 @@ def baseindexview(request):
 def dashboard_view(request):
     context = {}
     return render(request, "home/index.html", context)
+
+
+def timeline_view(request):
+    context = {}
+    return render(request, "accounts/detail.html", context)
