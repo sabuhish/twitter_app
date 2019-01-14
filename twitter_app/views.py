@@ -5,3 +5,8 @@ from django.shortcuts import render
 def baseindexview(request):
     context = {}
     return render(request, "accounts/login.html", context)
+
+
+def dashboard_view(request):
+    context = {}
+    return render(request, "home/index.html", context)
