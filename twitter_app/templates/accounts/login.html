@@ -13,7 +13,8 @@
                                 Twitter application is free to use for as long as you want with two active projects.
                             </p>
                             <div class="friend-logo">
-                                <span><img style="width: 147px;position: relative;top: -25px;left: -27px;" src="{% static 'twitter/images/python_logo.png' %}" alt=""></span>
+                                <span><img style="width: 147px;position: relative;top: -25px;left: -27px;"
+                                           src="{% static 'twitter/images/python_logo.png' %}" alt=""></span>
                             </div>
                             <a href="#" title="" class="folow-me">Follow Us on</a>
                         </div>
@@ -23,19 +24,21 @@
                     <div class="login-reg-bg">
                         <div class="log-reg-area sign">
                             <h2 class="log-title">Login</h2>
-                            <p>
-                                Don’t use Twitter application Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join
-                                now</a>
-                            </p>
-                            <form method="post">
-                                <div class="form-group">
-                                    <input type="text" id="input" required="required"/>
-                                    <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" required="required"/>
-                                    <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
-                                </div>
+                            {% if message %}
+                                <p style="color: red">
+                                    {{ message }}
+                                </p>
+                            {% endif %}
+                            <form method="post" action="{% url 'login' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% for field in login_form %}
+                                    <div class="form-group">
+                                        {{ field }}
+                                        <label class="control-label"
+                                               for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        <i class="mtrl-select"></i>
+                                    </div>
+                                {% endfor %}
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" checked="checked"/><i class="check-box"></i>Always
@@ -44,7 +47,7 @@
                                 </div>
                                 <a href="#" title="" class="forgot-pwd">Forgot Password?</a>
                                 <div class="submit-btns">
-                                    <button class="mtr-btn signin" type="button"><span>Login</span></button>
+                                    <button class="mtr-btn signin" type="submit"><span>Login</span></button>
                                     <button class="mtr-btn signup" type="button"><span>Register</span></button>
                                 </div>
                             </form>
